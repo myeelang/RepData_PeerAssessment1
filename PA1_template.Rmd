@@ -5,9 +5,10 @@ output:
     keep_md: true
 ---
 
-
 ## Loading and preprocessing the data
 
+unzip("activity.zip")
+activity <- read.csv("activity.cvs")
 
 
 ## What is mean total number of steps taken per day?
