@@ -5,14 +5,26 @@ output:
     keep_md: true
 ---
 
+```{r setup, include=FALSE}
+## Setting Global Option
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+```
+
 ## Loading and preprocessing the data
 
 unzip("activity.zip")
 activity <- read.csv("activity.cvs")
 
+activity$date <- as.Date(activity$date, "%Y-%m-%d")
+
 
 ## What is mean total number of steps taken per day?
+```{r stepsperday}
+activity <- group_by(activity, date)
+stepsperday <- summarize(activity, steps=sum(steps, na.rm=TRUE))
 
+```
 
 
 ## What is the average daily activity pattern?
