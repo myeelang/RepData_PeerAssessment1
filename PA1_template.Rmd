@@ -1,35 +1,53 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
+date: "5/30/2021"
+output: html_document
 ---
 
-```{r setup, include=FALSE}
 ## Setting Global Option
+
+```{r setup, include=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
-library(dplyr)
 ```
 
-## Loading and preprocessing the data
+## Loading and processing data
 
+```{r loadingdata}
 unzip("activity.zip")
 activity <- read.csv("activity.csv")
-
 activity$date <- as.Date(activity$date, "%Y-%m-%d")
-
-
+```
 ## What is mean total number of steps taken per day?
+
+**Histogram of the total number of steps taken each day**
 ```{r stepsperday}
-activity <- group_by(activity, date)
-stepsperday <- summarize(activity, steps=sum(steps, na.rm=TRUE))
+library(dplyr)
+library(ggplot2)
+
+act_bydate <- group_by(activity, date)
+stepsperday <- summarize(act_bydate, steps=sum(steps, na.rm=TRUE))
+
 g <- ggplot(stepsperday, aes(date, steps))
-g+geom_col(color="black", fill="blue")
+g+geom_col(color="black", fill="blue")+labs(title="Total Steps Taken Each Day")
+
+stepsmean <- mean(stepsperday$steps)
+stepsmedian <- median(stepsperday$steps)
 ```
 
+**Mean of the total number of steps taken per day is: `r stepsmean`**  
+**Median of the total number of steps taken per day is: `r stepsmedian`**
 
 ## What is the average daily activity pattern?
 
+```{r stepsbyinterval}
+act_byinterval <- group_by(activity, interval)
+steps_interval<- summarize(act_byinterval, steps=mean(steps, na.rm=TRUE))
+with(steps_interval, plot(interval, steps, type="l"))
+mtext("Average number of steps taken in each 5-minute interval")
+max_steps <- max(steps_interval$steps)
+max_interval <- steps_interval[steps_interval$steps>=max_steps, 1]
+```
+**On average across all the days in the dataset, interval `r max_interval` contains the maximum number of steps of `r max_steps`**
 
 
 ## Imputing missing values
