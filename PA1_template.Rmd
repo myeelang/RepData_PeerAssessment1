@@ -23,7 +23,8 @@ activity$date <- as.Date(activity$date, "%Y-%m-%d")
 ```{r stepsperday}
 activity <- group_by(activity, date)
 stepsperday <- summarize(activity, steps=sum(steps, na.rm=TRUE))
-
+g <- ggplot(stepsperday, aes(date, steps))
+g+geom_col(color="black", fill="blue")
 ```
 
 
