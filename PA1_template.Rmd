@@ -14,7 +14,7 @@ library(dplyr)
 ## Loading and preprocessing the data
 
 unzip("activity.zip")
-activity <- read.csv("activity.cvs")
+activity <- read.csv("activity.csv")
 
 activity$date <- as.Date(activity$date, "%Y-%m-%d")
 
