@@ -166,4 +166,4 @@ https://github.com/rdpeng/RepData_PeerAssessment1
 
 7c376cc5447f11537f8740af8e07d6facc3d9645
 ```
-To View: https://htmlpreview.github.io/?https://github.com/myeelang/RepData_PeerAssessment1/edit/master/
+To View: https://htmlpreview.github.io/?https://github.com/myeelang/RepData_PeerAssessment1/blob/master/RepData_Assignment1.html
